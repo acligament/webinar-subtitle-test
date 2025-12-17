@@ -15,9 +15,13 @@ def main():
 
     # 2) Convert audio for Whisper
     run([
-        "ffmpeg", "-i", "audio.mp3",
-        "-ac", "1", "-ar", "16000",
-        "audio.wav", "-y"
+        "ffmpeg",
+        "-t", "300",          # ← ここがポイント（300秒 = 5分）
+        "-i", "audio.mp3",
+        "-ac", "1",
+        "-ar", "16000",
+        "audio.wav",
+        "-y"
     ])
 
     # 3) Transcribe with Whisper (SRT)
