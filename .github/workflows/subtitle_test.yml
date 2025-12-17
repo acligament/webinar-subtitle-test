@@ -1,0 +1,35 @@
+name: Webinar Subtitle Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y ffmpeg fonts-ipafont-gothic
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run subtitle pipeline
+        run: |
+          python main.py
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: webinar-subtitled-video
+          path: webinar_subtitled_test.mp4
