@@ -25,7 +25,7 @@ def main():
         "whisper", "audio.wav",
         "--language", "ja",
         "--task", "transcribe",
-        "--model", "medium",
+        "--model", "small",
         "--output_format", "srt",
         "--output_dir", "."
     ])
