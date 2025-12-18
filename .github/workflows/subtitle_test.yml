@@ -33,6 +33,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python translate_srt.py
+
+            - name: Debug OPENAI_API_KEY
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY is EMPTY"
+          else
+            echo "OPENAI_API_KEY is SET (length: ${#OPENAI_API_KEY})"
+          fi
       
       - name: Burn Japanese subtitles into video
         run: |
