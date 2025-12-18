@@ -27,7 +27,11 @@ jobs:
       - name: Run subtitle pipeline
         run: |
           python main.py
-
+      
+      - name: Translate subtitles to Japanese
+        run: |
+          python translate_srt.py
+      
       - name: Burn Japanese subtitles into video
         run: |
           ffmpeg -i webinar.mp4 \
