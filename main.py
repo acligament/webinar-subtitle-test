@@ -1,50 +1,48 @@
 import subprocess
 
-YOUTUBE_URL = "https://www.youtube.com/watch?v=4CO8d2NyfaU"
+VIDEO_URL = "https://www.dhs.gov/xlibrary/videos/18_0627_st_Tech_Talk_TPP.mp4"
 
 def run(cmd):
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, check=True)
 
 def main():
-    # 1) Download audio
+    # 1) Download MP4 directly
     run([
-        "yt-dlp", "-x", "--audio-format", "mp3",
-        "-o", "audio.%(ext)s", YOUTUBE_URL
+        "ffmpeg", "-y",
+        "-i", VIDEO_URL,
+        "-c", "copy",
+        "webinar.mp4"
     ])
 
-    # 2) Convert audio for Whisper
+    # 2) Extract audio (first 5 minutes for test)
     run([
         "ffmpeg",
-        "-t", "300",          # ← ここがポイント（300秒 = 5分）
-        "-i", "audio.mp3",
+        "-t", "300",
+        "-i", "webinar.mp4",
+        "-vn",
         "-ac", "1",
         "-ar", "16000",
         "audio.wav",
         "-y"
     ])
 
-    # 3) Transcribe with Whisper (SRT)
+    # 3) Whisper transcription (English)
     run([
         "whisper", "audio.wav",
-        "--language", "ja",
+        "--language", "en",
         "--task", "transcribe",
         "--model", "small",
         "--output_format", "srt",
         "--output_dir", "."
     ])
 
-    # 4) Download video
+    # 4) Burn subtitles into video
     run([
-        "yt-dlp", "-f", "mp4",
-        "-o", "webinar.mp4", YOUTUBE_URL
-    ])
-
-    # 5) Burn subtitles into video
-    run([
-        "ffmpeg", "-i", "webinar.mp4",
+        "ffmpeg",
+        "-i", "webinar.mp4",
         "-vf",
-        "subtitles=audio.srt:force_style='FontName=IPAGothic,FontSize=26,Outline=1,Alignment=2,MarginV=60'",
+        "subtitles=audio.srt:force_style='FontName=Arial,FontSize=26,Outline=1,Alignment=2,MarginV=60'",
         "-c:a", "copy",
         "webinar_subtitled_test.mp4"
     ])
