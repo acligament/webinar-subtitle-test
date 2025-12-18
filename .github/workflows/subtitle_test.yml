@@ -29,6 +29,8 @@ jobs:
           python main.py
       
       - name: Translate subtitles to Japanese
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python translate_srt.py
       
