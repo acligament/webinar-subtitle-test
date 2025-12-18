@@ -1,17 +1,29 @@
-from openai import OpenAI
+import os
 import re
+from openai import OpenAI
 
-client = OpenAI(api_key="OPENAI_API_KEY")
+client = OpenAI()  # ← api_key は env から自動で読む
 
 def translate_text(text):
-    resp = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {"role": "system", "content": "Translate the following English subtitles into natural Japanese for a scientific webinar."},
-            {"role": "user", "content": text}
-        ]
+    response = client.responses.create(
+        model="gpt-4o-mini",
+        input=[
+            {
+                "role": "system",
+                "content": (
+                    "Translate the following English subtitles into natural Japanese "
+                    "suitable for a scientific webinar. "
+                    "Keep technical terms in English where appropriate."
+                )
+            },
+            {
+                "role": "user",
+                "content": text
+            }
+        ],
     )
-    return resp.choices[0].message.content.strip()
+
+    return response.output_text.strip()
 
 with open("audio.srt", "r", encoding="utf-8") as f:
     lines = f.readlines()
