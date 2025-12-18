@@ -1,7 +1,7 @@
 from openai import OpenAI
 import re
 
-client = OpenAI(api_key="YOUR_OPENAI_API_KEY")
+client = OpenAI(api_key="OPENAI_API_KEY")
 
 def translate_text(text):
     resp = client.chat.completions.create(
