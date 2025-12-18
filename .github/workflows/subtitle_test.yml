@@ -28,15 +28,15 @@ jobs:
         run: |
           python main.py
 
+      - name: Burn Japanese subtitles into video
+        run: |
+          ffmpeg -i webinar.mp4 \
+            -vf "subtitles=audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=26,Outline=1,Alignment=2,MarginV=60'" \
+            -c:a copy \
+            webinar_subtitled_ja.mp4
+
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
           name: webinar-subtitled-video
-          path: webinar_subtitled_test.mp4
-      - name: Burn Japanese subtitles into video
-          run: |
-            ffmpeg -i webinar.mp4 \
-            -vf "subtitles=audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=26,Outline=1,Alignment=2,MarginV=60'" \
-            -c:a copy \
-            
-            webinar_subtitled_ja.mp4
+          path: webinar_subtitled_ja.mp4
