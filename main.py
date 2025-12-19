@@ -47,5 +47,5 @@ def main():
     "webinar_subtitled_test.mp4"
 ], check=True)
 
-if __name__ == "__main__":ー
-main()
+if __name__ == "__main__":
+    main()
