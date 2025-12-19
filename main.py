@@ -42,7 +42,7 @@ def main():
         "ffmpeg",
         "-i", "webinar.mp4",
         "-vf",
-        "subtitles=audio.srt:force_style='FontName=Arial,FontSize=16,Outline=1,Alignment=2,MarginV=20'",
+        "subtitles=audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=18,FontScale=0.75,Outline=1,Alignment=2,MarginV=20'"
         "-c:a", "copy",
         "webinar_subtitled_test.mp4"
     ])
