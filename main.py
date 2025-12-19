@@ -38,14 +38,14 @@ def main():
     ])
 
     # 4) Burn subtitles into video
-    run([
-        "ffmpeg",
-        "-i", "webinar.mp4",
-        "-vf",
-        "subtitles=audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=18,FontScale=0.75,Outline=1,Alignment=2,MarginV=20'"
-        "-c:a", "copy",
-        "webinar_subtitled_test.mp4"
-    ])
+    subprocess.run([
+    "ffmpeg",
+    "-i", "webinar.mp4",
+    "-vf",
+    "subtitles=audio_ja.srt:force_style=FontName=IPAexGothic,FontSize=18,FontScale=0.75,Outline=1,Alignment=2,MarginV=15",
+    "-c:a", "copy",
+    "webinar_subtitled_test.mp4"
+], check=True)
 
-if __name__ == "__main__":
+if __name__ == "__main__":ー
     main()
