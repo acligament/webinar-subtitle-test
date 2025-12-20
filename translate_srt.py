@@ -4,6 +4,9 @@ from openai import OpenAI
 
 client = OpenAI()  # ← api_key は env から自動で読む
 
+with open("audio.srt", "r", encoding="utf-8") as f:
+    lines = f.readlines()
+
 def translate_text(text):
     response = client.responses.create(
         model="gpt-4o-mini",
