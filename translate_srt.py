@@ -16,7 +16,12 @@ buffer = []
 def translate_text(text):
     response = client.responses.create(
         model="gpt-4o-mini",
-        input=f"Translate the following English subtitle into natural Japanese:\n{text}"
+        input=(
+            "Translate the following English subtitle into simple, clear Japanese "
+            "that a Japanese high school student can easily understand.\n"
+            "Use short sentences, avoid difficult words, and explain concepts plainly.\n\n"
+            f"{text}"
+        )
     )
     return response.output_text.strip()
 
