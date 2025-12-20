@@ -24,12 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ① 動画取得・Whisper（audio.srt を作る）
+      # ① Whisperで audio.srt を作る
       - name: Generate English subtitles
         run: |
           python main.py
 
-      # ② 翻訳（audio.srt → audio_ja.srt）
+      # ② 翻訳して audio_ja.srt を作る（★これが今まで無かった）
       - name: Translate subtitles to Japanese
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -40,7 +40,6 @@ jobs:
       - name: Burn Japanese subtitles
         run: |
           python burn.py
-          # もしくは：python main.py（焼き込み部分を残している場合）
 
       - name: Upload result
         uses: actions/upload-artifact@v4
