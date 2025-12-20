@@ -54,7 +54,7 @@ jobs:
       - name: Burn Japanese subtitles into video
         run: |
           ffmpeg -i webinar.mp4 \
-            -vf "subtitles=audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=26,Outline=1,Alignment=2,MarginV=60'" \
+            -vf "subtitles=audio_ko.srt:force_style='FontName=Noto Sans CJK KR,FontScale=0.6,Outline=1,Alignment=2,MarginV=60'"
             -c:a copy \
             webinar_subtitled_ja.mp4
 
