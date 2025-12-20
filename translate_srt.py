@@ -18,7 +18,7 @@ def translate_text(text):
         model="gpt-4o-mini",
         input=(
             "Translate the following English subtitle into simple, clear Japanese "
-            "that a Japanese high school student can easily understand.\n"
+            "that a Korean high school student can easily understand.\n"
             "Use short sentences, avoid difficult words, and explain concepts plainly.\n\n"
             f"{text}"
         )
