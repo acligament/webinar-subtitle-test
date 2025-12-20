@@ -24,10 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run subtitle pipeline
+      # ① 動画DL + audio.wav + audio.srt
+      - name: Generate English subtitles
         run: |
           python main.py
-      
+
+      # （任意）APIキー確認
       - name: Debug OPENAI_API_KEY
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -37,13 +39,15 @@ jobs:
           else
             echo "OPENAI_API_KEY is SET (length: ${#OPENAI_API_KEY})"
           fi
-      
+
+      # ② audio.srt → audio_ja.srt
       - name: Translate subtitles to Japanese
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python translate_srt.py
-      
+
+      # ③ 日本語字幕を焼き込み
       - name: Burn Japanese subtitles into video
         run: |
           ffmpeg -i webinar.mp4 \
