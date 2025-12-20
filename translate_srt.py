@@ -28,7 +28,10 @@ for line in lines:
         out.append(line)
     else:
         buffer.append(line.strip())
-    
+
+# ループ終了後に残った字幕を処理
+if buffer:
+    out.append(translate_text(" ".join(buffer)) + "\n")
 
 # ★ここが無いと絶対にファイルは作られません
 with open(OUTPUT, "w", encoding="utf-8") as f:
