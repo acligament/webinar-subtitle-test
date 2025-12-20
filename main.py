@@ -7,7 +7,7 @@ def run(cmd):
     subprocess.run(cmd, check=True)
 
 def main():
-    # 1) Download MP4 directly
+    # 1) Download MP4
     run([
         "ffmpeg", "-y",
         "-i", VIDEO_URL,
@@ -15,7 +15,7 @@ def main():
         "webinar.mp4"
     ])
 
-    # 2) Extract audio (first 5 minutes for test)
+    # 2) Extract audio
     run([
         "ffmpeg",
         "-t", "300",
@@ -27,7 +27,7 @@ def main():
         "-y"
     ])
 
-    # 3) Whisper transcription (English)
+    # 3) Whisper transcription
     run([
         "whisper", "audio.wav",
         "--language", "en",
@@ -36,16 +36,6 @@ def main():
         "--output_format", "srt",
         "--output_dir", "."
     ])
-
-    # 4) Burn subtitles into video
-    subprocess.run([
-    "ffmpeg",
-    "-i", "webinar.mp4",
-    "-vf",
-    "subtitles=./audio_ja.srt:force_style='FontName=IPAexGothic,FontSize=18,FontScale=0.75,Outline=1,Alignment=2,MarginV=15'",
-    "-c:a", "copy",
-    "webinar_subtitled_test.mp4"
-], check=True)
 
 if __name__ == "__main__":
     main()
