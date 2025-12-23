@@ -51,11 +51,11 @@ jobs:
           python translate_srt.py
 
       - name: Burn Korean subtitles into video
-          run: |
-            ffmpeg -i webinar.mp4 \
-              -vf "subtitles=audio_ko.srt:force_style='FontName=Noto Sans CJK KR,FontScale=0.6,Outline=1,Alignment=2,MarginV=60'" \
-              -c:a copy \
-              webinar_subtitled_ko.mp4
+        run: |
+          ffmpeg -i webinar.mp4 \
+            -vf "subtitles=audio_ko.srt:force_style='FontName=Noto Sans CJK KR,FontScale=0.6,Outline=1,Alignment=2,MarginV=60'" \
+            -c:a copy \
+            webinar_subtitled_ko.mp4
 
       - name: Upload result
         uses: actions/upload-artifact@v4
