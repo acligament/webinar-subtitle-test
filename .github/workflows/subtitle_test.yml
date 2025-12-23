@@ -61,4 +61,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: webinar-subtitled-video
-          path: webinar_subtitled_ja.mp4
+          path: webinar_subtitled_ko.mp4
