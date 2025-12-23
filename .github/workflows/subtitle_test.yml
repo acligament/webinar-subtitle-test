@@ -50,13 +50,12 @@ jobs:
         run: |
           python translate_srt.py
 
-      # ③ 日本語字幕を焼き込み
-      - name: Burn Japanese subtitles into video
-        run: |
-          ffmpeg -i webinar.mp4 \
-            -vf "subtitles=audio_ko.srt:force_style='FontName=Noto Sans CJK KR,FontScale=0.6,Outline=1,Alignment=2,MarginV=60'"
-            -c:a copy \
-            webinar_subtitled_ja.mp4
+      - name: Burn Korean subtitles into video
+          run: |
+            ffmpeg -i webinar.mp4 \
+              -vf "subtitles=audio_ko.srt:force_style='FontName=Noto Sans CJK KR,FontScale=0.6,Outline=1,Alignment=2,MarginV=60'" \
+              -c:a copy \
+              webinar_subtitled_ko.mp4
 
       - name: Upload result
         uses: actions/upload-artifact@v4
