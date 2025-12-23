@@ -5,10 +5,10 @@ print("burn.py started")
 print("CWD:", os.getcwd())
 print("Files:", os.listdir("."))
 
-if not os.path.exists("audio_ja.srt"):
-    raise FileNotFoundError("audio_ja.srt not found before burning")
+if not os.path.exists("audio_ko.srt"):
+    raise FileNotFoundError("audio_ko.srt not found before burning")
 
-subtitle = os.path.abspath("audio_ja.srt")
+subtitle = os.path.abspath("audio_ko.srt")
 
 subprocess.run([
     "ffmpeg",
