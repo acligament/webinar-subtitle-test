@@ -42,7 +42,7 @@ if buffer:
 with open(OUTPUT, "w", encoding="utf-8") as f:
     f.writelines(out)
 
-print("audio_ja.srt written") 
+print("audio_ko.srt written") 
 
 print("Files after translation:")
 import os
