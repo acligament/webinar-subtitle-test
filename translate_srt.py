@@ -5,7 +5,7 @@ client = OpenAI()
 
 # 入力（Whisperの出力）
 INPUT = "audio.srt"
-OUTPUT = "audio_ja.srt"
+OUTPUT = "audio_ko.srt"
 
 with open(INPUT, "r", encoding="utf-8") as f:
     lines = f.readlines()
