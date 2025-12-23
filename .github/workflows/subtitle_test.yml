@@ -44,7 +44,7 @@ jobs:
           fi
 
       # ② audio.srt → audio_ja.srt
-      - name: Translate subtitles to Japanese
+      - name: Translate subtitles to Korean
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
